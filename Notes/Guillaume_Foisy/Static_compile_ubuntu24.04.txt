@@ -3686,7 +3686,17 @@ i586-pc-msdosdjgpp-gcc
 i586-pc-msdosdjgpp-ar
 i586-pc-msdosdjgpp-ranlib
 
+--> sudo apt install build-essential unzip wget
+
 --> sudo apt install binutils-djgpp
+
+Confirme que les outils DJGPP sont bien reconnus.
+
+--> i586-pc-msdosdjgpp-ar --version
+
+--> i586-pc-msdosdjgpp-ranlib --version
+
+--> i586-pc-msdosdjgpp-ld --version
 
 
 Ce toolchain génère :
