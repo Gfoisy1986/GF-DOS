@@ -1,3 +1,8 @@
+
+<p align="center">
+  <img src="assets/logo.png" width="640">
+</p>
+
 🌌 GF‑DOS — Retro Computing Reborn
 Un écosystème moderne conçu pour FreeDOS 1.4, les Pentium‑class machines, DOSBox, 86Box, et tout passionné de rétro‑computing qui veut ramener Internet dans le monde DOS.
 
