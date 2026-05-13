@@ -3685,6 +3685,10 @@ Code
 i586-pc-msdosdjgpp-gcc
 i586-pc-msdosdjgpp-ar
 i586-pc-msdosdjgpp-ranlib
+
+--> sudo apt install binutils-djgpp
+
+
 Ce toolchain génère :
 
 .o compatibles DOS
