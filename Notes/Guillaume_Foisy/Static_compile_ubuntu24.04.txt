@@ -3837,7 +3837,7 @@ Si tout passe → tu es prêt pour GF‑NetStack DOS.
 Objectif : compiler ton moteur réseau DOS depuis Ubuntu 24.04.
 
 Étapes :
-installer DJGPP cross‑compiler
+installer DJGPP cross‑compiler (voir plus haut...)
 
 compiler en .o :
 
