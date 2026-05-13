@@ -3758,3 +3758,201 @@ tu auras un EXE DOS avec HTTPS + TLS 1.2 + WebSocket wss://
 sur FreeDOS 1.4.
 
 C’est du jamais vu.
+
+
+🗺️ GF‑DOS Roadmap — From FreeDOS Install → BearSSL Port
+(Ton plan de route complet, étape par étape)
+
+🧊 Phase 0 — Préparation du hardware (Pentium M)
+Objectif : avoir une machine rétro stable, propre, prête pour FreeDOS.
+
+Étapes :
+sauvegarder ou effacer Windows XP
+
+vérifier le BIOS (mode Legacy, pas ACPI)
+
+activer l’Ethernet onboard
+
+préparer une clé USB FreeDOS 1.4
+
+vérifier que le disque dur est en LBA
+
+🟦 Phase 1 — Installation FreeDOS 1.4 sur vrai hardware
+Objectif : un système DOS propre, stable, minimal.
+
+Étapes :
+booter sur la clé USB FreeDOS 1.4
+
+installer en mode “Full”
+
+choisir FreeDOS kernel + JEMMEX
+
+installer EDIT, HIMEM, etc.
+
+redémarrer et vérifier que tout fonctionne
+
+🟩 Phase 2 — Setup réseau onboard (Intel PRO/100, Broadcom, Realtek)
+Objectif : avoir Internet sur FreeDOS via Ethernet onboard.
+
+Étapes :
+télécharger le Packet Driver DOS pour ta carte
+
+copier dans C:\DRIVERS\ETHERNET
+
+ajouter dans AUTOEXEC.BAT :
+
+Code
+C:\DRIVERS\ETHERNET\PRO100PD.COM 0x60
+SET MTCPCFG=C:\MTCP\CONFIG.CFG
+C:\MTCP\DHCP.EXE
+créer C:\MTCP\CONFIG.CFG :
+
+Code
+PACKETINT 0x60
+HOSTNAME PENTIUMM
+redémarrer
+
+tester :
+
+Code
+DHCP
+PING 8.8.8.8
+Si ça marche → réseau DOS opérationnel.
+
+🟨 Phase 3 — Tests mTCP
+Objectif : valider que le réseau DOS est stable avant GF‑NetStack.
+
+Tests :
+FTPSRV
+
+HTGET http://example.com
+
+TELNET towel.blinkenlights.nl
+
+PING google.com
+
+Si tout passe → tu es prêt pour GF‑NetStack DOS.
+
+🔥 Phase 4 — Build GF‑NetStack DOS (version non‑TLS)
+Objectif : compiler ton moteur réseau DOS depuis Ubuntu 24.04.
+
+Étapes :
+installer DJGPP cross‑compiler
+
+compiler en .o :
+
+Code
+i586-pc-msdosdjgpp-gcc -O2 -c gfnet_http.c
+i586-pc-msdosdjgpp-gcc -O2 -c gfnet_ws.c
+créer la lib statique :
+
+Code
+i586-pc-msdosdjgpp-ar rcs libgfnetstack.a *.o
+compiler un EXE test :
+
+Code
+i586-pc-msdosdjgpp-gcc test_http.c libgfnetstack.a -o test.exe
+copier sur FreeDOS
+
+tester HTTP + WebSocket ws://
+
+Quand ça marche → GF‑NetStack DOS v0.1 validé.
+
+🟥 Phase 5 — Préparation du port BearSSL → DOS
+Objectif : préparer ton wrapper GF‑NetStack pour recevoir TLS.
+
+Étapes :
+isoler les fonctions I/O (send/recv)
+
+créer une abstraction :
+
+Code
+gf_tls_read()
+gf_tls_write()
+gf_tls_handshake()
+préparer un module gf_tls_stub.c
+
+vérifier que GF‑NetStack compile sans TLS
+
+Tu prépares le terrain.
+
+🟧 Phase 6 — Portage BearSSL → DOS
+Objectif : faire tourner TLS 1.2 sur FreeDOS.
+
+Étapes :
+compiler BearSSL avec DJGPP
+
+désactiver les algos trop lourds
+
+adapter le RNG (DOS entropy)
+
+intégrer dans GF‑NetStack
+
+tester handshake TLS :
+
+Code
+https://example.com
+https://neverssl.com
+https://api.github.com
+Quand ça marche → tu viens de créer BearSSL DOS.
+
+🟪 Phase 7 — GF‑NetStack DOS v1.0 (TLS + HTTPS + wss://)
+Objectif : finaliser ton moteur réseau moderne DOS.
+
+Fonctionnalités :
+HTTP 1.1
+
+HTTPS (TLS 1.2)
+
+WebSocket ws://
+
+WebSocket wss://
+
+FTP/FTPS
+
+SMTP/SMTPS
+
+POP3/POP3S
+
+Tu as maintenant le premier stack réseau moderne pour FreeDOS depuis 25 ans.
+
+🟫 Phase 8 — GF‑Web (DOS) prototype
+Objectif : commencer ton navigateur DOS mobile‑friendly.
+
+Étapes :
+UI curses
+
+HTML mobile minimal
+
+CSS minimal
+
+images ASCII
+
+liste YouTube mobile
+
+bouton “Télécharger”
+
+API JSON
+
+WebSocket chat
+
+GF‑Web devient la vitrine de GF‑DOS.
+
+🧭 Résumé du Roadmap GF‑DOS
+Voici ton plan complet, clair :
+
+Installer FreeDOS 1.4
+
+Configurer réseau onboard
+
+Tester mTCP
+
+Compiler GF‑NetStack DOS
+
+Préparer wrapper TLS
+
+Porter BearSSL → DOS
+
+Activer HTTPS + wss://
+
+Construire GF‑Web DOS
