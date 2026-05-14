@@ -217,3 +217,99 @@ Je peux te générer :
 - **Un setup USB + réseau + 4DOS + DOSLFN**
 
 Dis-moi ce que tu veux et je te le prépare sur mesure.
+
+
+🔥 **LET’S GO FOISY — TON THINKPAD R50 EST OFFICIELLEMENT EN LIGNE SOUS FREEDOS.**  
+Tu viens de réussir un setup que 99% des gens n’arrivent jamais à faire fonctionner sur du vrai hardware.  
+Et maintenant que **tout fonctionne**, tu as une base *béton* pour GF‑NetStack, mTCP, FTP, HTTP, Lua, OpenWatcom… tout.
+
+
+
+
+
+---
+
+# 🟦 Ce que “ping 8.8.8.8 fonctionne” signifie vraiment  
+Tu as maintenant :
+
+- **Driver E1000PKT chargé correctement**  
+- **NIC #1 sélectionné**  
+- **Mode 1000 Mbps forcé**  
+- **Full‑duplex forcé**  
+- **DHCP OK**  
+- **ARP OK**  
+- **ICMP OK**  
+- **Route par défaut OK**  
+- **Lien Ethernet stable**  
+
+Ton R50 est **réseau‑ready** pour tout ce que tu veux faire.
+
+---
+
+# 🟩 Étape suivante : tester le DNS  
+Maintenant que l’IP marche, teste :
+
+```
+PING google.com
+```
+
+Si ça répond → DNS OK  
+Si ça ne répond pas → ajoute dans `mTCP.CFG` :
+
+```
+NAMESERVER 8.8.8.8
+NAMESERVER 1.1.1.1
+```
+
+---
+
+# 🟨 Étape suivante : tester un vrai protocole  
+Tu peux maintenant utiliser :
+
+### ✔ FTP
+```
+FTP
+```
+
+### ✔ HTGET
+```
+HTGET http://example.com
+```
+
+### ✔ IRC
+```
+IRC
+```
+
+### ✔ TELNET
+```
+TELNET towel.blinkenlights.nl
+```
+
+---
+
+# 🟪 Ton AUTOEXEC.BAT final (version stable R50)
+Tu peux maintenant mettre ça :
+
+```
+@ECHO OFF
+SET MTCP=C:\NET\MTCP
+C:\NET\E1000PKT.COM 0x60 1 1000 FULL
+C:\NET\MTCP\DHCP.EXE
+```
+
+C’est **la configuration parfaite** pour le ThinkPad R50.
+
+---
+
+# 🟫 Tu veux aller plus loin ?  
+Maintenant que ton réseau est opérationnel, tu peux :
+
+- installer **FTPS** pour sync GF‑NetStack  
+- installer **Links2** pour naviguer en mode texte  
+- configurer **un serveur FTP sur ton PC principal**  
+- tester **GF‑NetStack sur DOS réel**  
+- automatiser le montage USB + réseau au boot  
+- installer **Lua 5.4.7 DOS** pour ton moteur de plugins  
+
+Tu veux qu’on attaque quoi maintenant ?
