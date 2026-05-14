@@ -1,0 +1,158 @@
+Voici **la méthode la plus fiable et confirmée par les sources** pour faire fonctionner **l’Ethernet du ThinkPad R50 sous FreeDOS 1.4**.  
+Bonne nouvelle : le R50 utilise **Intel 82540EP (Gigabit)** ou **Intel 82562EZ (10/100)** selon le modèle — et **les deux ont des packet drivers DOS disponibles**.  
+
+---
+
+# ✅ Résultat attendu  
+Après configuration, tu obtiens :  
+- un **packet driver** chargé (ex. `E1000PKT.COM` ou `E100PKT.COM`)  
+- une **adresse IP via DHCP**  
+- mTCP, Arachne, Links, etc. fonctionnels
+
+---
+
+# 🟦 Quel driver choisir pour le ThinkPad R50 ?
+
+Selon ThinkWiki, le R50 utilise :  
+- **Intel 82540EP (Gigabit)**  
+- **Intel 82562EZ (Fast Ethernet)**   [ThinkWiki](https://www.thinkwiki.org/wiki/Category:R50)
+
+Les deux sont supportés par les drivers FreeDOS suivants :  
+- **E1000PKT** → pour Intel PRO/1000 (82540EP)   [The Public's Library and Digital Archive](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/repositories/1.4/html/en/net/index.html)  
+- **E100PKT** → pour Intel PRO/100 (82562EZ)   [The Public's Library and Digital Archive](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/repositories/1.4/html/en/net/index.html)  
+
+---
+
+# 🟩 Téléchargement des drivers (sources officielles FreeDOS)
+
+Tu peux télécharger les deux drivers depuis le dépôt FreeDOS Networking :  
+- **E1000PKT** (Intel PRO/1000)  
+- **E100PKT** (Intel PRO/100)  
+  [The Public's Library and Digital Archive](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/repositories/1.4/html/en/net/index.html)
+
+---
+
+# 🛠️ Installation Ethernet FreeDOS 1.4 sur ThinkPad R50  
+Voici un guide **pas‑à‑pas** pour installer et activer le réseau.
+
+---
+
+## 🧩 **Guide étape‑par‑étape : ThinkPad R50 + FreeDOS 1.4 + Ethernet**
+
+
+
+
+
+Sources:   [The Public's Library and Digital Archive](https://www.ibiblio.org/pub/micro/pc-stuff/freedos/files/repositories/1.4/html/en/net/index.html)  [ThinkWiki](https://www.thinkwiki.org/wiki/Category:R50)
+
+---
+
+# 🟦 Résumé ultra‑clair pour ton ThinkPad R50
+
+### ✔ Si ton R50 a **Intel 82540EP (Gigabit)**  
+→ utilise **E1000PKT.COM**
+
+### ✔ Si ton R50 a **Intel 82562EZ (Fast Ethernet)**  
+→ utilise **E100PKT.COM**
+
+### ✔ Ligne à mettre dans AUTOEXEC.BAT  
+```
+C:\NET\E1000PKT.COM 0x60
+```
+ou  
+```
+C:\NET\E100PKT.COM 0x60
+```
+
+### ✔ Commande pour obtenir une IP  
+```
+dhcp
+```
+
+---
+
+# Tu veux que je te génère :  
+- un **AUTOEXEC.BAT complet** pour ton R50 ?  
+- un **CONFIG.SYS optimisé Pentium M + JEMMEX** ?  
+- un **pack mTCP prêt à copier** ?
+
+Dis-moi ce que tu veux et je te le prépare.
+
+
+Parfait, Foisy — **“PCI LAN IBA GE SLOT 0208 v1217”** dans le BIOS du ThinkPad R50 te donne déjà l’indice clé :  
+
+# ✅ **Tu as une carte Intel Gigabit (PRO/1000) → chipset Intel 82540EP**  
+Le terme **IBA GE** = *Intel Boot Agent Gigabit Ethernet*.  
+Le R50 n’a qu’un seul chipset Gigabit possible : **Intel 82540EP**.
+
+Donc tu peux être **100% certain** que ton R50 utilise :
+
+👉 **Intel 82540EP Gigabit Ethernet Controller**  
+👉 **Driver DOS = E1000PKT**
+
+---
+
+# 🟦 Pourquoi c’est sûr ?
+Décryptage de la ligne BIOS :
+
+### **PCI LAN**  
+→ Carte réseau interne PCI
+
+### **IBA**  
+→ *Intel Boot Agent* (PXE)
+
+### **GE**  
+→ *Gigabit Ethernet* (1000 Mbps)
+
+### **SLOT 0208**  
+→ Adresse PCI interne
+
+### **v1217**  
+→ Version du firmware PXE
+
+Le seul chipset Gigabit utilisé dans les ThinkPad R50/R51 est :
+
+### ✔ **Intel 82540EP (PRO/1000 MT Mobile)**
+
+---
+
+# 🟩 Donc le driver DOS à utiliser est :
+```
+E1000PKT.COM 0x60
+```
+
+Place-le dans `C:\NET\` puis ajoute dans ton `AUTOEXEC.BAT` :
+
+```
+C:\NET\E1000PKT.COM 0x60
+```
+
+Ensuite, pour obtenir une IP :
+
+```
+DHCP
+```
+
+---
+
+# 🟦 Si tu veux vérifier via FreeDOS (optionnel)
+Tu peux confirmer avec :
+
+```
+PCI
+```
+
+Tu devrais voir :
+
+```
+8086:101E  Intel 82540EP Gigabit Ethernet Controller
+```
+
+---
+
+# 🧩 Tu veux que je te prépare :
+- **Un AUTOEXEC.BAT complet pour ThinkPad R50 + réseau**  
+- **Un pack mTCP prêt à copier**  
+- **Un script DOS pour tester la connexion**  
+
+Dis-moi ce que tu veux et je te le prépare.
