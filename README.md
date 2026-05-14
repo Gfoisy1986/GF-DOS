@@ -385,7 +385,7 @@ Actuellement Phase (0) !
 
 - R40e ()
 
-- R50 ()
+- R50 (*)
 
 
 [ ] Phase 1
@@ -394,7 +394,7 @@ Actuellement Phase (0) !
 
 - R40e ()
 
-- R50 ()
+- R50 () Partielement terminé
 
 [ ] Phase 2
 
