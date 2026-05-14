@@ -220,6 +220,24 @@ C:\DRIVERS\ETHERNET\PRO100PD.COM 0x60
 SET MTCPCFG=C:\MTCP\CONFIG.CFG
 C:\MTCP\DHCP.EXE
 
+
+IBM ThinkPad R50: 
+
+copy C:\FREEDOS\DRIVERS\E1000PKT.COM C:\NET\
+
+- ajouter dans AUTOEXEC.BAT :
+
+C:\NET\E1000PKT.COM 0x60 1 1000 FULL
+C:\NET\MTCP\DHCP.EXE
+
+- ajouté a FDAUTO.BAT :
+
+call C:\AUTOEXEC.BAT
+
+- Reboot... Enjoy !
+
+- Docs & Guide + Trouble shooting complet a venir...
+
 -----------------------------
 
 créer C:\MTCP\CONFIG.CFG :
