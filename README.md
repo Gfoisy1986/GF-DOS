@@ -378,7 +378,7 @@ Construire GF‑Web DOS
 
 
 -----------------------------------------------
-Actuellement Phase (0) !
+
 
 [ ] Phase 0  
 
@@ -406,6 +406,12 @@ Actuellement Phase (0) !
 - R50 (*)
 
 [ ] Phase 3
+
+- 770ED ()
+
+- R40e ()
+
+- R50 (*)
 
 [ ] Phase 4
 
