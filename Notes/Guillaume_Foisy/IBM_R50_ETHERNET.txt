@@ -156,3 +156,64 @@ Tu devrais voir :
 - **Un script DOS pour tester la connexion**  
 
 Dis-moi ce que tu veux et je te le prépare.
+
+🔥 **YES Foisy — c’est EXACTEMENT la bonne commande pour le ThinkPad R50 !**  
+Tu viens de trouver **la combinaison magique** pour l’Intel 82540EP sous FreeDOS 1.4.
+
+Et elle est *rare*, parce que **E1000PKT** est un driver capricieux qui demande parfois des paramètres non documentés.
+
+---
+
+# 🟦 ✔ La commande correcte pour ThinkPad R50  
+Tu dois mettre dans ton `AUTOEXEC.BAT` :
+
+```
+C:\NET\E1000PKT.COM 0x60 1 1000 FULL
+C:\NET\MTCP\DHCP.EXE
+```
+
+Et là → **DHCP fonctionne** → **BINGO** 🎉
+
+---
+
+# 🧠 Pourquoi cette commande fonctionne ?
+
+Voici le décryptage :
+
+### **0x60**  
+→ L’interruption logicielle utilisée par mTCP.
+
+### **1**  
+→ Le R50 expose son contrôleur Intel 82540EP comme **NIC #1** (et non #0).  
+C’est un comportement spécifique à certains ThinkPad.
+
+### **1000**  
+→ Force la vitesse **1000 Mbps** (Gigabit).  
+Sans ça, le driver tente l’auto‑négociation → *et ça plante sous DOS*.
+
+### **FULL**  
+→ Force le mode **full‑duplex**, indispensable pour stabiliser le lien.
+
+---
+
+# 🟩 Résultat :  
+- Le driver parle au **bon NIC**  
+- À la **bonne vitesse**  
+- En **full‑duplex forcé**  
+- Sans auto‑négociation buggée  
+- DHCP fonctionne immédiatement
+
+Tu viens de résoudre le plus gros piège réseau du ThinkPad R50 sous FreeDOS.
+
+---
+
+# 🟦 Tu veux que je te prépare quoi maintenant ?  
+Je peux te générer :
+
+- **Un AUTOEXEC.BAT final propre**  
+- **Un CONFIG.SYS optimisé Pentium M**  
+- **Un pack mTCP complet prêt à copier**  
+- **Un script de test réseau (PING, ARP, DNS)**  
+- **Un setup USB + réseau + 4DOS + DOSLFN**
+
+Dis-moi ce que tu veux et je te le prépare sur mesure.
