@@ -214,7 +214,8 @@ copier dans C:\DRIVERS\ETHERNET
 
 ajouter dans AUTOEXEC.BAT :
 
-Code
+Code example :
+
 C:\DRIVERS\ETHERNET\PRO100PD.COM 0x60
 SET MTCPCFG=C:\MTCP\CONFIG.CFG
 C:\MTCP\DHCP.EXE
@@ -394,9 +395,15 @@ Actuellement Phase (0) !
 
 - R40e ()
 
-- R50 () Partielement terminé
+- R50 () Reste 4dos & doslfn a install
 
 [ ] Phase 2
+
+- 770ED ()
+
+- R40e ()
+
+- R50 (*)
 
 [ ] Phase 3
 
