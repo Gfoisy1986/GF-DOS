@@ -3759,6 +3759,8 @@ sur FreeDOS 1.4.
 
 C’est du jamais vu.
 
+---------------------------------------------------------------------------------------------------------------------
+
 
 🗺️ GF‑DOS Roadmap — From FreeDOS Install → BearSSL Port
 (Ton plan de route complet, étape par étape)
@@ -3781,7 +3783,7 @@ vérifier que le disque dur est en LBA
 Objectif : un système DOS propre, stable, minimal.
 
 Étapes :
-booter sur la clé USB FreeDOS 1.4
+booter sur la clé USB ou dvd FreeDOS 1.4
 
 installer en mode “Full”
 
@@ -3805,11 +3807,16 @@ Code
 C:\DRIVERS\ETHERNET\PRO100PD.COM 0x60
 SET MTCPCFG=C:\MTCP\CONFIG.CFG
 C:\MTCP\DHCP.EXE
+
+-----------------------------
+
 créer C:\MTCP\CONFIG.CFG :
 
 Code
 PACKETINT 0x60
 HOSTNAME PENTIUMM
+
+----------------------------
 redémarrer
 
 tester :
