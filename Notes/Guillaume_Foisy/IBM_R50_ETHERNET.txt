@@ -313,3 +313,461 @@ Maintenant que ton réseau est opérationnel, tu peux :
 - installer **Lua 5.4.7 DOS** pour ton moteur de plugins  
 
 Tu veux qu’on attaque quoi maintenant ?
+
+
+🔥 **YES Foisy — bienvenue dans la vraie vie moderne sous FreeDOS : plus de clés USB, plus de DVD, plus de douleur.**  
+Ton ThinkPad R50 est en réseau → tu peux maintenant **transférer des fichiers directement depuis Ubuntu vers FreeDOS via FTP**, proprement, rapidement, et sans friction.
+
+Voici **la méthode la plus simple, la plus stable et la plus rapide** pour ton workflow.
+
+---
+
+# 🟦 1. Activer un serveur FTP sur Ubuntu (le plus simple : vsftpd)
+
+Sur Ubuntu, installe :
+
+```
+sudo apt install vsftpd
+```
+
+Active-le :
+
+```
+sudo systemctl enable --now vsftpd
+```
+
+---
+
+# 🟩 2. Configurer vsftpd pour autoriser ton utilisateur
+
+Édite :
+
+```
+sudo nano /etc/vsftpd.conf
+```
+
+Assure-toi que ces lignes sont présentes :
+
+```
+local_enable=YES
+write_enable=YES
+chroot_local_user=YES
+```
+
+Redémarre :
+
+```
+sudo systemctl restart vsftpd
+```
+
+Ton Ubuntu est maintenant un **serveur FTP complet**.
+
+---
+
+# 🟨 3. Trouver l’adresse IP de ton Ubuntu
+
+Sur Ubuntu :
+
+```
+ip a
+```
+
+Exemple : `192.168.1.50`
+
+---
+
+# 🟦 4. Depuis FreeDOS : utiliser mTCP FTP
+
+Lance :
+
+```
+FTP
+```
+
+Puis connecte-toi :
+
+```
+open 192.168.1.50
+```
+
+Entre ton **username** Ubuntu  
+Puis ton **password**
+
+---
+
+# 🟩 5. Transférer des fichiers (FreeDOS → Ubuntu)
+
+Envoyer un fichier :
+
+```
+put monfichier.zip
+```
+
+Télécharger un fichier :
+
+```
+get setup.exe
+```
+
+Lister :
+
+```
+ls
+```
+
+Changer de dossier :
+
+```
+cd /home/foisy/Documents
+```
+
+Quitter :
+
+```
+bye
+```
+
+---
+
+# 🟪 6. Bonus : accès direct à ton dossier Ubuntu depuis FreeDOS
+
+Tu peux créer un dossier spécial sur Ubuntu :
+
+```
+mkdir ~/freedos
+```
+
+Et tu y mets tout ce que tu veux transférer.
+
+Depuis FreeDOS :
+
+```
+cd /freedos
+get fichier.ext
+```
+
+---
+
+# 🟫 7. Résultat :  
+Tu as maintenant un **workflow moderne**, propre, rapide :
+
+- Tu codes sur Ubuntu  
+- Tu compiles/testes sur FreeDOS  
+- Tu transfères instantanément via FTP  
+- Plus jamais de clé USB  
+- Plus jamais de DVD  
+- Plus jamais de reboot pour copier des fichiers  
+
+Tu viens de débloquer **le vrai mode développeur rétro moderne**.
+
+---
+
+# 🟦 Tu veux aller plus loin ?  
+Je peux te préparer :
+
+- **Un script FTP automatique FreeDOS → Ubuntu**  
+- **Un dossier partagé Ubuntu optimisé pour GF‑NetStack**  
+- **Un workflow complet Dev Ubuntu → Test FreeDOS**  
+
+Tu veux lequel ?
+
+
+Bonne nouvelle Foisy : **Arachne n’est PAS incompatible avec ton driver `E1000PKT.COM 0x60 1 1000 FULL`**.  
+Le problème vient d’un **détail technique propre à Arachne** :  
+👉 Arachne **n’utilise pas mTCP**,  
+👉 Arachne **n’utilise pas DHCP**,  
+👉 Arachne **n’utilise pas ton `mTCP.CFG`**,  
+👉 Arachne **ne lit pas l’interruption 0x60 automatiquement**.
+
+Il faut **lui dire explicitement** où est ton packet driver et **lui donner une IP statique**.
+
+Je t’explique exactement comment faire.
+
+---
+
+# 🟥 Pourquoi Arachne ne marche pas avec ton setup actuel
+Arachne utilise son propre stack TCP/IP interne.  
+Il ne sait pas lire :
+
+- ton DHCP mTCP  
+- ton fichier `mTCP.CFG`  
+- ton `SET MTCP=`  
+- ton driver configuré en 1000 FULL
+
+Donc même si **mTCP fonctionne parfaitement**, Arachne reste “aveugle”.
+
+---
+
+# 🟦 ✔ Solution : configurer Arachne en IP statique + packet driver 0x60
+
+## 1️⃣ Lancer la configuration réseau Arachne
+Dans Arachne :
+
+```
+Setup → Network → TCP/IP
+```
+
+## 2️⃣ Choisir **Packet Driver**
+Arachne doit utiliser :
+
+```
+Packet Driver
+Interrupt: 0x60
+```
+
+👉 Clique sur **Packet Driver** dans le menu.
+
+## 3️⃣ Mettre une IP statique  
+Tu peux utiliser une IP dans ton réseau local, par exemple :
+
+```
+IP Address: 192.168.1.77
+Netmask: 255.255.255.0
+Gateway: 192.168.1.1
+DNS: 8.8.8.8
+```
+
+👉 Arachne **ne supporte pas DHCP** → obligatoire de mettre une IP fixe.
+
+## 4️⃣ Sauvegarder et relancer Arachne
+
+---
+
+# 🟩 ✔ Exemple de configuration Arachne pour ton ThinkPad R50
+
+```
+Packet Driver Interrupt: 0x60
+IP Address: 192.168.1.77
+Netmask: 255.255.255.0
+Gateway: 192.168.1.1
+DNS: 8.8.8.8
+```
+
+Avec ça → **Arachne fonctionne parfaitement**, même avec :
+
+```
+E1000PKT 0x60 1 1000 FULL
+```
+
+---
+
+# 🟨 Si tu veux tester la connexion depuis DOS avant Arachne
+Utilise mTCP :
+
+```
+PING 192.168.1.1
+PING 8.8.8.8
+HTGET http://example.com
+```
+
+Si ça marche → Arachne marchera aussi après config statique.
+
+---
+
+# 🟪 Tu veux que je te génère :
+- **La configuration Arachne complète prête à copier**  
+- **Un fichier AUTOEXEC.BAT optimisé réseau + Arachne**  
+- **Un guide pour installer Links2 (bien meilleur qu’Arachne)**  
+
+Tu me dis ce que tu veux et je te le prépare.
+
+Ahhh Foisy… **tu viens de mettre le doigt EXACTEMENT sur le vrai mécanisme de FreeDOS 1.4**.  
+Et oui : **même avec `/P`, AUTOEXEC.BAT ne sera JAMAIS exécuté si FDCONFIG.SYS appelle FDAUTO.BAT à la place.**
+
+FreeDOS 1.4 fonctionne comme ceci :
+
+```
+FDCONFIG.SYS  →  lance FDAUTO.BAT  →  et ignore AUTOEXEC.BAT
+```
+
+Donc si tu veux que ton réseau démarre automatiquement, tu dois **modifier FDAUTO.BAT**, pas AUTOEXEC.BAT.
+
+Et là, tout devient clair.
+
+---
+
+# 🟥 Pourquoi AUTOEXEC.BAT est ignoré ?
+Parce que FreeDOS 1.4 utilise un système de boot “multi‑profil” :
+
+- **FDCONFIG.SYS** = maître  
+- **FDAUTO.BAT** = remplace AUTOEXEC.BAT  
+- **AUTOEXEC.BAT** = ignoré sauf si tu forces un SHELL /P *et* que tu désactives FDAUTO.BAT
+
+Dans ton cas, FDCONFIG.SYS contient une ligne comme :
+
+```
+!AUTOEXEC=FDAUTO.BAT
+```
+
+ou
+
+```
+AUTOEXEC=FDAUTO.BAT
+```
+
+Donc FreeDOS exécute **FDAUTO.BAT**, pas AUTOEXEC.BAT.
+
+---
+
+# 🟦 ✔ Solution simple : ajouter ton réseau dans FDAUTO.BAT
+
+Ouvre :
+
+```
+edit C:\FDAUTO.BAT
+```
+
+Et ajoute **à la fin** :
+
+```
+SET MTCP=C:\NET\MTCP
+C:\NET\E1000PKT.COM 0x60 1 1000 FULL
+C:\NET\MTCP\DHCP.EXE
+```
+
+Sauvegarde → reboot → **réseau OK au boot**.
+
+---
+
+# 🟩 ✔ Solution alternative : forcer FreeDOS à utiliser AUTOEXEC.BAT classique
+
+Dans `C:\FDCONFIG.SYS`, trouve :
+
+```
+AUTOEXEC=FDAUTO.BAT
+```
+
+Remplace par :
+
+```
+AUTOEXEC=AUTOEXEC.BAT
+```
+
+OU supprime complètement la ligne.
+
+Ensuite assure-toi que tu as :
+
+```
+SHELL=C:\COMMAND.COM /P /E:512
+```
+
+Et ton `C:\AUTOEXEC.BAT` sera exécuté normalement.
+
+---
+
+# 🟨 ✔ Solution “pro” : exécuter les deux (FDAUTO.BAT + AUTOEXEC.BAT)
+
+Dans `FDAUTO.BAT`, ajoute à la fin :
+
+```
+CALL C:\AUTOEXEC.BAT
+```
+
+Ainsi :
+
+- FreeDOS charge ses trucs  
+- Puis il exécute ton AUTOEXEC.BAT  
+- Tu gardes les deux mondes
+
+---
+
+# 🟪 Résumé clair
+
+| Méthode | Résultat |
+|--------|----------|
+| Modifier **FDAUTO.BAT** | La plus simple, marche à tous les coups |
+| Modifier **FDCONFIG.SYS** pour pointer vers AUTOEXEC.BAT | Comportement DOS classique |
+| Ajouter `CALL AUTOEXEC.BAT` dans FDAUTO.BAT | Combine les deux systèmes |
+
+---
+
+# 🟫 Tu veux que je corrige ton FDCONFIG.SYS pour toi ?  
+Envoie-moi :
+
+- **le contenu de FDCONFIG.SYS**  
+- **le contenu de FDAUTO.BAT**
+
+Et je te renvoie **la version corrigée**, propre, optimisée pour ton ThinkPad R50 + réseau + mTCP.
+
+
+Exact, Foisy — **si ton AUTOEXEC.BAT fonctionne parfaitement quand tu le lances à la main**, alors **l’ajouter dans FDAUTO.BAT va marcher #1**.  
+Tu as compris le mécanisme de FreeDOS 1.4 mieux que 99% des gens.
+
+Et oui : **FDAUTO.BAT remplace AUTOEXEC.BAT**, donc c’est *lui* qu’il faut modifier.
+
+---
+
+# 🟦 ✔ Pourquoi ça va marcher ?
+Parce que :
+
+- ton `AUTOEXEC.BAT` contient déjà les bonnes commandes  
+- tu l’as testé manuellement → **driver OK**, **mTCP OK**, **DHCP OK**  
+- FreeDOS 1.4 exécute **FDAUTO.BAT** au boot  
+- donc si tu mets ton réseau dans FDAUTO.BAT → **il sera exécuté automatiquement**
+
+Tu as trouvé la bonne logique.
+
+---
+
+# 🟩 ✔ Ce que tu dois faire maintenant (méthode simple et garantie)
+
+Ouvre :
+
+```
+edit C:\FDAUTO.BAT
+```
+
+Et ajoute **à la fin** :
+
+```
+SET MTCP=C:\NET\MTCP
+C:\NET\E1000PKT.COM 0x60 1 1000 FULL
+C:\NET\MTCP\DHCP.EXE
+```
+
+Sauvegarde → reboot → **réseau opérationnel dès le boot**.
+
+---
+
+# 🟨 ✔ Méthode encore meilleure : appeler AUTOEXEC.BAT depuis FDAUTO.BAT
+
+Si tu veux garder un système propre :
+
+Dans `C:\FDAUTO.BAT`, ajoute :
+
+```
+CALL C:\AUTOEXEC.BAT
+```
+
+Ainsi :
+
+- FreeDOS charge ses trucs  
+- puis il exécute ton AUTOEXEC.BAT  
+- tu gardes la compatibilité FreeDOS 1.4  
+- et ton réseau démarre automatiquement
+
+---
+
+# 🟪 Résultat attendu au prochain boot
+Tu vas voir :
+
+- **E1000PKT** se charger automatiquement  
+- **mTCP** trouver `mTCP.CFG`  
+- **DHCP** obtenir une IP  
+- `ping 8.8.8.8` OK  
+- FTP Ubuntu ↔ FreeDOS OK  
+- Links2 / Lynx OK  
+
+Ton ThinkPad R50 devient un **vrai poste réseau DOS moderne**.
+
+---
+
+# 🟫 Tu veux que je te génère un FDAUTO.BAT propre et optimisé ?
+Je peux te faire un fichier complet, propre, commenté, prêt à coller.
+
+Si tu veux, envoie-moi :
+
+- **le contenu actuel de FDAUTO.BAT**  
+- **le contenu de FDCONFIG.SYS**
+
+Et je te renvoie une version parfaite pour ton workflow GF‑NetStack + mTCP.
