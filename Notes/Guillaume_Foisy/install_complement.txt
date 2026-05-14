@@ -92,3 +92,83 @@ Et ton système FreeDOS 1.4 sera **propre**, **minimal**, **stable**, et **parfa
 - **Un plan Phase 2 : réseau + mTCP + FTPS**  
 
 Dis-moi lequel et je te le prépare immédiatement.
+
+
+
+Parfait Foisy — je te donne **les sources exactes, fiables et modernes** pour télécharger **4DOS** et **DOSLFN**, sans liens morts ni archives douteuses.
+
+---
+
+# 🟦 Où télécharger **4DOS** (version complète, stable)
+
+
+
+
+
+4DOS est aujourd’hui **libre et maintenu par JP Software** sous licence Open Source.
+
+### ✔ Source officielle (recommandée)
+- **JP Software Open Source Archive**  
+  → Contient 4DOS 7.50 (la dernière version)
+
+### ✔ Version exacte à prendre
+- **4DOS 7.50**  
+  Format : `4dos750.zip`  
+  Compatible : 8086 → Pentium, FreeDOS, MS‑DOS, PC‑DOS
+
+### ✔ Pourquoi cette version
+- Dernière version stable  
+- Supporte les alias, l’historique, les scripts `.BTM`  
+- Fonctionne parfaitement sur FreeDOS 1.4
+
+---
+
+# 🟨 Où télécharger **DOSLFN** (support long filenames)
+
+
+
+
+
+DOSLFN est maintenu par **Lucho** et hébergé sur des miroirs FreeDOS/SvarDOS.
+
+### ✔ Source fiable (recommandée)
+- **SvarDOS repository**  
+  → Contient `doslfn.zip` (version 0.41c ou 0.41d selon miroir)
+
+### ✔ Version exacte à prendre
+- **DOSLFN 0.41c** (la plus stable)  
+  Format : `doslfn.zip`  
+  Fichiers inclus : `DOSLFN.COM`, `DOSLFN.EXE`, documentation
+
+### ✔ Pourquoi cette version
+- Support long filenames (LFN) sous DOS réel  
+- Compatible FAT16/FAT32  
+- Fonctionne avec FreeDOS, MS‑DOS, PC‑DOS  
+- Léger et chargeable en `LH`
+
+---
+
+# 🟩 Installation rapide (rappel)
+
+### **4DOS**
+```
+C:\4DOS\4DOS.COM /P /E:1024
+```
+Dans `CONFIG.SYS` :
+```
+SHELL=C:\4DOS\4DOS.COM /P /E:1024
+```
+
+### **DOSLFN**
+Copie dans `C:\DOS` puis dans `AUTOEXEC.BAT` :
+```
+LH C:\DOS\DOSLFN.COM
+```
+
+---
+
+# 🟦 Tu veux que je te prépare :  
+- **Un AUTOEXEC.BAT propre avec 4DOS + DOSLFN + OpenWatcom**  
+- **Un CONFIG.SYS optimisé pour Pentium II/M**  
+
+Dis-moi lequel et je te le génère immédiatement.
