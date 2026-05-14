@@ -176,19 +176,19 @@ drivers, documentation, modules, tests sur vrai hardware.
 🗺️ GF‑DOS Roadmap — From FreeDOS Install → BearSSL Port
 
 
-🧊 Phase 0 — Préparation du hardware (Pentium M)
+🧊 Phase 0 — Préparation du hardware IBM ThinkPad R50(Pentium M), IBM ThinkPad R40e(Pentium 4) & IBM ThinkPad 770ED(Pentium II MMX)
 Objectif : avoir une machine rétro stable, propre, prête pour FreeDOS.
 
 Étapes :
-sauvegarder ou effacer Windows XP
+Wipe Windows XP
 
 vérifier le BIOS (mode Legacy, pas ACPI)
 
 activer l’Ethernet onboard
 
-préparer une clé USB FreeDOS 1.4
+préparer une clé USB ou DvD FreeDOS 1.4
 
-vérifier que le disque dur est en LBA
+vérifier que le disque dur est en LBA (Partionnement & Formatage)
 
 🟦 Phase 1 — Installation FreeDOS 1.4 sur vrai hardware
 Objectif : un système DOS propre, stable, minimal.

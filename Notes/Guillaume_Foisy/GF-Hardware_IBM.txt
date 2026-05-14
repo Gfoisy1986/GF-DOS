@@ -1,0 +1,23 @@
+--> IBM ThinkPad R50(Pentium M), IBM ThinkPad R40e(Pentium 4) & IBM ThinkPad 770ED(Pentium II MMX)
+
+--> 3Com 3c562 PCMCIA ethernet/Modem Card
+
+--> Generic USB 2.0 PCMCIA card
+
+--> Generic USB 3.0 + Bluetooth card
+
+--> To verify (WIFI PCMCIA CARD)
+
+
+Liste Materiel a acheter: (need to be realy accessible via ebay...)
+
+- Generic popular ethernet pcmcia card !
+
+- Generic popular WIFI PCMCIA CARD !
+
+- Generic PCMCIA Floppy drive !
+
+- Generic PCMCIA DVD-ROM !
+
+
+Specification des IBM Thinkpad :   (à Venir)
