@@ -172,3 +172,108 @@ LH C:\DOS\DOSLFN.COM
 - **Un CONFIG.SYS optimisé pour Pentium II/M**  
 
 Dis-moi lequel et je te le génère immédiatement.
+
+
+Oui, on peut **automatiser** le chargement de **USBUHCI** + **USBDRIVE** au boot… **mais seulement si ton matériel le supporte proprement**.  
+Sur du Pentium II / Pentium III / Pentium M, ça fonctionne très bien.  
+Sur du Pentium I ou chipsets exotiques, c’est parfois instable.
+
+Je t’explique **comment faire**, **ce qui est possible**, et **ce qui doit rester manuel**.
+
+---
+
+# 🟦 1. Peut‑on charger USBUHCI + USBDRIVE automatiquement au boot ?
+**Oui.**  
+Tu peux les charger dans `CONFIG.SYS` ou `AUTOEXEC.BAT` pour que ton USB soit monté automatiquement comme un disque DOS (ex: `D:`).
+
+Mais…
+
+### ✔ USBUHCI = driver USB bas niveau  
+### ✔ USBDRIVE = driver de disque USB (FAT16/FAT32)
+
+Ces deux-là peuvent être chargés automatiquement **si ton chipset UHCI est stable**.
+
+---
+
+# 🟩 2. Méthode recommandée (stable)  
+Charge **USBUHCI** dans `CONFIG.SYS`  
+Charge **USBDRIVE** dans `AUTOEXEC.BAT`
+
+### CONFIG.SYS
+```
+DEVICE=C:\DOS\USBUHCI.SYS /v
+```
+
+### AUTOEXEC.BAT
+```
+LH C:\DOS\USBDRIVE.COM /v
+```
+
+### Résultat
+- USBUHCI initialise le contrôleur USB  
+- USBDRIVE monte automatiquement ta clé USB comme un disque DOS  
+- Tu obtiens un lecteur `D:` ou `E:` dès le boot  
+
+---
+
+# 🟨 3. Méthode “full auto” (si ton chipset est 100% compatible)
+Tu peux tout mettre dans `CONFIG.SYS` :
+
+```
+DEVICE=C:\DOS\USBUHCI.SYS /v
+DEVICEHIGH=C:\DOS\USBDRIVE.SYS /v
+```
+
+⚠️ **Mais attention** :  
+- Certains BIOS ne donnent pas le contrôle USB assez tôt  
+- Certains chipsets VIA/SiS plantent si USBDRIVE est chargé trop tôt  
+- Sur FreeDOS 1.4, USBDRIVE préfère être lancé après HIMEMX/JEMMEX
+
+Donc je recommande la méthode mixte.
+
+---
+
+# 🟥 4. Ce qui doit rester manuel (si instable)
+Si ton USB freeze, disparaît, ou refuse de monter :
+
+Tu peux charger **USBDRIVE** manuellement après le boot :
+
+```
+USBDRIVE /v
+```
+
+Ou même recharger USBUHCI :
+
+```
+USBUHCI /stop
+USBUHCI /start
+```
+
+---
+
+# 🟦 5. Recommandation pour ton workflow GF‑NetStack
+Vu ton matériel (Pentium II / Pentium M / Pentium 4 IBM), tu peux utiliser :
+
+### CONFIG.SYS
+```
+DEVICE=C:\DOS\HIMEMX.EXE
+DEVICE=C:\DOS\JEMMEX.EXE NOEMS
+DEVICE=C:\DOS\USBUHCI.SYS /v
+```
+
+### AUTOEXEC.BAT
+```
+LH C:\DOS\DOSLFN.COM
+LH C:\DOS\USBDRIVE.COM /v
+```
+
+C’est **le setup le plus stable** pour FreeDOS 1.4 + USB.
+
+---
+
+# 🧩 Si tu veux, je peux te générer :
+- **Un CONFIG.SYS complet optimisé pour ton Pentium**  
+- **Un AUTOEXEC.BAT propre avec 4DOS + DOSLFN + USB + OpenWatcom**  
+- **Un script batch pour monter/démonter l’USB à la demande**  
+
+Dis-moi ce que tu veux et je te le prépare.
