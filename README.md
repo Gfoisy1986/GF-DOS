@@ -168,10 +168,13 @@ rétro‑écologique
 Les contributions sont les bienvenues :
 drivers, documentation, modules, tests sur vrai hardware.
 
+---------------------------------------------------------------
+
+
 🔥 Roadmap
 
 🗺️ GF‑DOS Roadmap — From FreeDOS Install → BearSSL Port
-(Ton plan de route complet, étape par étape)
+
 
 🧊 Phase 0 — Préparation du hardware (Pentium M)
 Objectif : avoir une machine rétro stable, propre, prête pour FreeDOS.
