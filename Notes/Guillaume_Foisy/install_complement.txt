@@ -1,0 +1,94 @@
+Parfait — tu es rendu exactement à la bonne étape : **installer OpenWatcom, 4DOS et DOSLFN** pour compléter ton environnement FreeDOS 1.4 minimal + dev.
+
+Voici **ce que tu dois faire maintenant**, sans rien d’inutile, et dans l’ordre optimal pour un système propre et stable.
+
+---
+
+# 🟦 1. **OpenWatcom** — ton compilateur C/C++ 16‑bit/32‑bit  
+C’est le compilateur le plus propre, le plus moderne et le plus compatible pour FreeDOS.
+
+### 📌 Où l’installer  
+- Depuis le **Bonus Disk** si tu l’as  
+- Sinon, télécharger la version DOS/Win32 (OW 1.9 ou 2.0 fork)
+
+### 📌 Installation recommandée  
+- Installe-le dans `C:\WATCOM`  
+- Ajoute les variables dans `AUTOEXEC.BAT` :
+
+```
+SET WATCOM=C:\WATCOM
+SET EDPATH=C:\WATCOM\EDDAT
+SET PATH=%PATH%;C:\WATCOM\BINW;C:\WATCOM\BINNT
+```
+
+### 📌 Pourquoi tu en as besoin  
+- Compiler GF‑NetStack DOS (C)  
+- Générer des `.LIB` statiques pour FreeDOS  
+- Compiler des outils auxiliaires pour ton workflow
+
+---
+
+# 🟩 2. **4DOS** — le shell avancé indispensable  
+4DOS remplace `COMMAND.COM` avec un shell **plus puissant**, **plus confortable**, et **plus moderne**.
+
+### 📌 Pourquoi tu veux 4DOS  
+- Historique de commandes  
+- Auto‑complétion  
+- Alias  
+- Scripts `.BTM` ultra puissants  
+- Meilleure gestion des erreurs
+
+### 📌 Installation  
+- Installe dans `C:\4DOS`  
+- Ajoute dans `CONFIG.SYS` :
+
+```
+SHELL=C:\4DOS\4DOS.COM /P /E:1024
+```
+
+---
+
+# 🟨 3. **DOSLFN** — support long filenames  
+Tu n’en as pas *absolument* besoin, mais pour ton workflow moderne (Lua, archives, docs), c’est très utile.
+
+### 📌 Installation  
+- Copie `DOSLFN.COM` dans `C:\DOS`  
+- Ajoute dans `AUTOEXEC.BAT` :
+
+```
+LH C:\DOS\DOSLFN.COM
+```
+
+### 📌 Pourquoi c’est utile  
+- Manipuler des fichiers venant de Linux/Windows  
+- Éviter les noms tronqués `GFNETS~1.ZIP`  
+- Confort général
+
+---
+
+# 🟦 4. **Résumé clair pour toi, Foisy**  
+Tu as déjà installé :  
+✔ Kernel  
+✔ HIMEMX  
+✔ JEMMEX  
+✔ EDIT  
+✔ FDAPM  
+✔ SHSUCDX  
+✔ VIM  
+✔ mTCP (ou équivalent)  
+
+Il te reste seulement :  
+- **OpenWatcom**  
+- **4DOS**  
+- **DOSLFN**  
+
+Et ton système FreeDOS 1.4 sera **propre**, **minimal**, **stable**, et **parfait pour GF‑NetStack**.
+
+---
+
+# 🧩 Tu veux que je te génère :  
+- **Un CONFIG.SYS optimisé pour Pentium II/M**  
+- **Un AUTOEXEC.BAT propre avec 4DOS + DOSLFN + OpenWatcom**  
+- **Un plan Phase 2 : réseau + mTCP + FTPS**  
+
+Dis-moi lequel et je te le prépare immédiatement.
