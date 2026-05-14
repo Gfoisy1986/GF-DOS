@@ -222,7 +222,11 @@ SET MTCPCFG=C:\MTCP\CONFIG.CFG
 
 C:\MTCP\DHCP.EXE
 
+créer C:\MTCP\CONFIG.CFG :
 
+Code
+PACKETINT 0x60
+HOSTNAME PENTIUMM
 ----------------------------------
 
 IBM ThinkPad R50: 
@@ -244,21 +248,8 @@ call C:\AUTOEXEC.BAT
 
 - Docs & Guide + Trouble shooting complet a venir...
 
------------------------------
-
-créer C:\MTCP\CONFIG.CFG :
-
-Code
-PACKETINT 0x60
-HOSTNAME PENTIUMM
-
-----------------------------
-redémarrer
-
 tester :
 
-Code
-DHCP
 PING 8.8.8.8
 Si ça marche → réseau DOS opérationnel.
 
