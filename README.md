@@ -205,9 +205,11 @@ installer EDIT, HIMEM, etc.
 redémarrer et vérifier que tout fonctionne
 
 🟩 Phase 2 — Setup réseau onboard (Intel PRO/100, Broadcom, Realtek)
+
 Objectif : avoir Internet sur FreeDOS via Ethernet onboard.
 
 Étapes :
+
 télécharger le Packet Driver DOS pour ta carte
 
 copier dans C:\DRIVERS\ETHERNET
@@ -225,8 +227,11 @@ C:\MTCP\DHCP.EXE
 créer C:\MTCP\CONFIG.CFG :
 
 Code
+
 PACKETINT 0x60
+
 HOSTNAME PENTIUMM
+
 ----------------------------------
 
 IBM ThinkPad R50: 
@@ -246,12 +251,14 @@ call C:\AUTOEXEC.BAT
 
 - Reboot... Enjoy !
 
-- Docs & Guide + Trouble shooting complet a venir...
-
 tester :
 
 PING 8.8.8.8
+
 Si ça marche → réseau DOS opérationnel.
+
+- Docs & Guide + Trouble shooting complet a venir...
+
 
 🟨 Phase 3 — Tests mTCP
 Objectif : valider que le réseau DOS est stable avant GF‑NetStack.
